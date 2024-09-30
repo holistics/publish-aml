@@ -3,10 +3,6 @@ description: 'Deploy AML Project'
 outputs:
   deploy_result:
     description: 'Result of the deployment'
-    value: ${{ steps.deploy-aml.outputs.random-id }}
 runs:
-  using: "composite"
-  steps:
-    - id: deploy-aml
-      run: echo "random-id=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-      shell: bash
+  using: node20
+  main: 'dist/index.js'
