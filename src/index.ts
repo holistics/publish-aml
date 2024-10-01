@@ -58,6 +58,11 @@ async function run () {
     action.error(result);
     process.exit(1);
   }
+  const jobResult = result.result;
+  if (jobResult.status !== 'success') {
+    action.error(result);
+    process.exit(1);
+  }
   action.setOutput('result', result);
 }
 run();
