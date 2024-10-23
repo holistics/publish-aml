@@ -13,7 +13,7 @@ const HOLISTICS_HOST = process.env.HOLISTICS_HOST ?? 'https://secure.holistics.i
 const HOLISTICS_API_HOST = `${HOLISTICS_HOST}/api/v2`;
 
 async function submitDeploy () {
-  const url = `${HOLISTICS_API_HOST}/aml_studio/projects/submit_deploy`;
+  const url = `${HOLISTICS_API_HOST}/aml_studio/projects/submit_publish`;
   const result = await fetch(url, {
     method: 'post',
     headers,
