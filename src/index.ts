@@ -51,18 +51,23 @@ async function polling(jobId: number) {
 }
 
 async function run () {
-  const job = await submitDeploy();
-  const result = await polling(job.id) as any;
-  console.log(JSON.stringify(result, null, 2));
-  if (result.status === 'failure') {
-    action.error(result);
+  try {
+    const job = await submitDeploy();
+    const result = await polling(job.id) as any;
+    console.log(JSON.stringify(result, null, 2));
+    if (result.status === 'failure') {
+      action.error(result);
+      process.exit(1);
+    }
+    const jobResult = result.result;
+    if (jobResult.data.status !== 'success') {
+      action.error(result);
+      process.exit(1);
+    }
+    action.setOutput('result', result);
+  } catch (error: any) {
+    action.error(error);
     process.exit(1);
   }
-  const jobResult = result.result;
-  if (jobResult.data.status !== 'success') {
-    action.error(result);
-    process.exit(1);
-  }
-  action.setOutput('result', result);
 }
 run();
