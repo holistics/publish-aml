@@ -18,7 +18,7 @@ on:
       - closed
 
 jobs:
-  deploy-aml:
+  publish-aml:
     if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
 
@@ -32,5 +32,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy AML # run deployment
-        uses: holistics/deploy-aml@v1.0
+        uses: holistics/publish-aml@v1.0
 ```
